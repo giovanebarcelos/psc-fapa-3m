@@ -14,6 +14,19 @@ public class AlunoStat {
                 new ArrayList<Aluno>();
 
         lerDados(ler, alunos);
+
+        int mediaIdades = getMediaIdades(alunos);
+        System.out.println("Média Idades = " +
+                mediaIdades);
+    }
+
+    private static int getMediaIdades(
+            ArrayList<Aluno> alunos) {
+        int somaIdades = 0;
+        for (Aluno aluno: alunos){
+            somaIdades += aluno.idade;
+        }
+        return somaIdades / alunos.size();
     }
 
     private static void lerDados(Scanner ler, ArrayList<Aluno> alunos) {
