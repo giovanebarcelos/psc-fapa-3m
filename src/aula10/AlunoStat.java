@@ -13,6 +13,10 @@ public class AlunoStat {
         ArrayList<Aluno> alunos =
                 new ArrayList<Aluno>();
 
+        lerDados(ler, alunos);
+    }
+
+    private static void lerDados(Scanner ler, ArrayList<Aluno> alunos) {
         Aluno aluno;
         do {
             aluno = new Aluno();
