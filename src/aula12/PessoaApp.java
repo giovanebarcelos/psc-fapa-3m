@@ -23,7 +23,7 @@ public class PessoaApp {
                     break;
                 case 2:
                     System.out.println("Listar");
-                    //pessoaApp.listar();
+                    pessoaApp.listar();
                     break;
                 case 9:
                     break;
@@ -33,6 +33,9 @@ public class PessoaApp {
         }
 
 
+    }
+
+    private void listar() {
     }
 
     private void incluir() {
