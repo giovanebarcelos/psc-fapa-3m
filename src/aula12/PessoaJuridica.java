@@ -6,5 +6,8 @@ public class PessoaJuridica
 
     public PessoaJuridica(int codigo, String nome, String idPfOuPj) {
         super();
+        this.codigo = codigo;
+        this.nome = nome;
+        this.CNPJ = idPfOuPj;
     }
 }
