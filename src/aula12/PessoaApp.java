@@ -36,6 +36,12 @@ public class PessoaApp {
     }
 
     private void listar() {
+        System.out.printf("%-10s", "Código");
+        System.out.printf("%-60s", "Nome");
+        for (Pessoa pessoa: this.pessoas){
+            System.out.printf("\n%-10d", pessoa.codigo);
+            System.out.printf("%-60s", pessoa.nome);
+        }
     }
 
     private void incluir() {
