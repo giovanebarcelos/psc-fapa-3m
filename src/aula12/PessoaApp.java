@@ -8,7 +8,7 @@ public class PessoaApp {
     private ArrayList<Pessoa> pessoas =
             new ArrayList<Pessoa>();
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         PessoaApp pessoaApp =
                 new PessoaApp();
 
@@ -38,14 +38,26 @@ public class PessoaApp {
     private void listar() {
         System.out.printf("%-10s", "Código");
         System.out.printf("%-60s", "Nome");
-        for (Pessoa pessoa: this.pessoas){
+        for (Pessoa pessoa : this.pessoas) {
             System.out.printf("\n%-10d", pessoa.codigo);
             System.out.printf("%-60s", pessoa.nome);
         }
     }
 
     private void incluir() {
-        int codigo = Utl.getInt("Codigo: ");
+        int codigo = 0;
+        while (codigo == 0) {
+            codigo = Utl.getInt("Codigo: ");
+            try {
+                if (this.existPessoa(codigo)) {
+                    throw new Exception("Código já existe!");
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                codigo = 0;
+            }
+        }
+
         String nome = Utl.getString("Nome: ");
         String pfOuPj = Utl.getString(
                 "PF ou PJ? ",
@@ -54,8 +66,8 @@ public class PessoaApp {
         Pessoa pessoa;
         boolean isPF = "PF".equals(pfOuPj);
         String idPfOuPj = Utl.getString(
-                isPF ? "CPF: ": "CNPJ");
-        if (isPF){
+                isPF ? "CPF: " : "CNPJ");
+        if (isPF) {
             pessoa = new PessoaFisica(
                     codigo, nome, idPfOuPj);
         } else {
@@ -66,9 +78,19 @@ public class PessoaApp {
                 "Salvar? ",
                 new String[]{"S", "N"},
                 "Digite S ou N");
-        if ("S".equals(sim_nao)){
+        if ("S".equals(sim_nao)) {
             pessoas.add(pessoa);
         }
+    }
+
+    private boolean existPessoa(int codigo) {
+        boolean eureka = false;
+        for (Pessoa pessoa: this.pessoas){
+            if (pessoa.codigo == codigo){
+                eureka = true;
+            }
+        }
+        return eureka;
     }
 
     private int menu() {
