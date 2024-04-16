@@ -24,7 +24,8 @@ public class C028 {
         System.out.print("Idade: ");
         int idade = ler.nextInt();
 
-        double valor = getValorTabela(idade);
+        //double valor = getValorTabela(idade);
+        double valor = getValorTabelaF(idade);
 
         System.out.printf("Nome: %s", nome);
         System.out.printf("Valor: %12.2f", valor);
@@ -44,5 +45,19 @@ public class C028 {
         } else {
             return 400.0;
         }
+    }
+
+    private static double getValorTabelaF(int idade) {
+        double[][] tabela = {
+                {10, 30.0}, {29, 60.0}, {45, 120.0},
+                {59, 150.0}, {65, 250.0}};
+
+        for (int faixa = 0; faixa < tabela.length; faixa++ ){
+            if (idade <= tabela[faixa][0]){
+                return tabela[faixa][1];
+            }
+        }
+
+        return 400.0;
     }
 }
