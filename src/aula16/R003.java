@@ -64,4 +64,3 @@ public class R003 {
         System.out.printf("e. Quantidade de homens: %d%n", homemContagem);
     }
 }
-
