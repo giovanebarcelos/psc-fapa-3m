@@ -11,7 +11,7 @@ public class RefeicaoApp {
         RefeicaoApp refeicaoApp = new RefeicaoApp();
         refeicaoApp.carregarRefeicoes();
 
-        refeicaoApp.lerRefeicao();
+        refeicaoApp.lerRefeicoes();
     }
 
     private void carregarRefeicoes() {
@@ -33,13 +33,37 @@ public class RefeicaoApp {
         this.refeicoes.add(new Refeicao(4, "Refrigerante diet", 65, TipoRefeicao.Bebida));
     }
 
-    public void lerRefeicao() {
+    private void lerRefeicoes(){
+        String continuarSN;
+        Scanner scanner = new Scanner(System.in);
+        do {
+            this.lerRefeicao();
+
+            while (true){
+                System.out.print("\nContinuar calculando calorias das refeições <S/N>? ");
+                continuarSN = scanner.next().toUpperCase();
+
+                if ("S".equals(continuarSN) || "N".equals(continuarSN)){
+                    break;
+                } else {
+                    System.out.println("Digite S para Sim e N para Não!\n");
+                }
+            }
+        } while ("S".equals(continuarSN));
+    }
+
+    private void lerRefeicao() {
         System.out.println("== Refeição ==");
         Refeicao prato = this.lerRefeicao(TipoRefeicao.Prato);
         Refeicao sobremesa = this.lerRefeicao(TipoRefeicao.Sobremesa);
         Refeicao bebida = this.lerRefeicao(TipoRefeicao.Bebida);
 
-        System.out.printf("\nTotal de calorias da refeição: %d", this.getTotalCalorias());
+        comanda = new ArrayList<Refeicao>();
+        comanda.add(prato);
+        comanda.add(sobremesa);
+        comanda.add(bebida);
+
+        System.out.printf("\nTotal de calorias da refeição: %d\n", this.getTotalCalorias());
     }
 
     Refeicao lerRefeicao(TipoRefeicao tipo) {
@@ -71,10 +95,21 @@ public class RefeicaoApp {
     }
 
     private Refeicao getRefeicao(TipoRefeicao tipo, int codigo) {
+        for (Refeicao refeicao: this.refeicoes){
+            if (refeicao.getTipo().equals(tipo) && refeicao.getCodigo() == codigo){
+                return refeicao;
+            }
+        }
+
+
         return null;
     }
 
     private int getTotalCalorias() {
-        return 0;
+        int totalCalorias = 0;
+        for (Refeicao refeicao: this.comanda){
+            totalCalorias += refeicao.getQtdeCalorias();
+        }
+        return totalCalorias;
     }
 }
